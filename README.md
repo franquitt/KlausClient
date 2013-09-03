@@ -5,4 +5,4 @@ Es un cliente de mensajería instantánea con íconos, conversaciones en grupo e
 
 Nota
 ----
-Para tener todas las funciones graficas en linuz es necesario devéz en cuando ejecutar el jar desde la terminal :/
+Para tener todas las funciones graficas en linux es necesario devéz en cuando ejecutar el jar desde la terminal :/
