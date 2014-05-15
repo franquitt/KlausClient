@@ -8,6 +8,197 @@ package chatuniformconeccion;
  *
  * @author franco
  */
+ /*
+ CREATE TABLE `enfrentamientos` (
+`id` int(30) NOT NULL,
+  `ataque` varchar(30) NOT NULL,
+  `defensa` varchar(30) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `groupchat_lines`
+--
+
+CREATE TABLE `groupchat_lines` (
+`id` int(11) NOT NULL,
+  `author` varchar(40) NOT NULL,
+  `grouprec` varchar(40) NOT NULL,
+  `texte` text NOT NULL,
+  `ts` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `movimientos`
+--
+
+CREATE TABLE `movimientos` (
+`id` int(6) NOT NULL,
+  `user1` varchar(40) NOT NULL,
+  `user2` varchar(40) NOT NULL,
+  `turno` varchar(40) NOT NULL,
+  `xy` varchar(40) NOT NULL,
+  `tipo` varchar(40) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+`id` int(10) NOT NULL,
+  `name` varchar(40) NOT NULL,
+  `estado` varchar(40) NOT NULL DEFAULT 'offline',
+  `numunic` varchar(60) NOT NULL
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=77 ;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `estado`, `numunic`) VALUES
+(74, 'Franco', 'offline', '000000000000000'),
+(72, 'franco', 'offline', '353227051191734'),
+(75, 'gyuu', 'online', '353861056225848'),
+(76, 'fhfu\n', 'offline', '355259050673477');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `webchat_groups`
+--
+
+CREATE TABLE `webchat_groups` (
+`id` int(11) NOT NULL,
+  `creador` varchar(40) NOT NULL,
+  `name` varchar(40) NOT NULL,
+  `friends` text NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Table structure for table `webchat_lines`
+--
+
+CREATE TABLE `webchat_lines` (
+`id` int(11) NOT NULL,
+  `author` varchar(40) NOT NULL,
+  `receptor` varchar(40) NOT NULL,
+  `text` text NOT NULL,
+  `ts` varchar(20) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+
+
+--
+-- Table structure for table `webchat_users`
+--
+
+CREATE TABLE `webchat_users` (
+`id` int(11) NOT NULL,
+  `pass` varchar(200) DEFAULT NULL,
+  `conectado` varchar(10) NOT NULL DEFAULT 'NO',
+  `usuario` varchar(40) DEFAULT NULL,
+  `name` varchar(40) NOT NULL,
+  `usuarioenc` varchar(100) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `validado` varchar(10) NOT NULL,
+  `friends` text,
+  `friendsrq` text,
+  `friendsrqr` text,
+  `groups` text,
+  `groupsrq` text
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `enfrentamientos`
+--
+ALTER TABLE `enfrentamientos`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `groupchat_lines`
+--
+ALTER TABLE `groupchat_lines`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `movimientos`
+--
+ALTER TABLE `movimientos`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `numunic` (`numunic`);
+
+--
+-- Indexes for table `webchat_groups`
+--
+ALTER TABLE `webchat_groups`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `webchat_lines`
+--
+ALTER TABLE `webchat_lines`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `webchat_users`
+--
+ALTER TABLE `webchat_users`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `enfrentamientos`
+--
+ALTER TABLE `enfrentamientos`
+MODIFY `id` int(30) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `groupchat_lines`
+--
+ALTER TABLE `groupchat_lines`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `movimientos`
+--
+ALTER TABLE `movimientos`
+MODIFY `id` int(6) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=77;
+--
+-- AUTO_INCREMENT for table `webchat_groups`
+--
+ALTER TABLE `webchat_groups`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `webchat_lines`
+--
+ALTER TABLE `webchat_lines`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `webchat_users`
+--
+ALTER TABLE `webchat_users`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+ */
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Image;
@@ -662,7 +853,7 @@ public class Graficos extends javax.swing.JFrame {
         usuario = txtUsuario.getText();
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conexion = DriverManager.getConnection("jdbc:mysql://db4free.net:3306/klausmain", "madprogrammer", "aezakmy4891734");
+            conexion = DriverManager.getConnection("jdbc:mysql://server:port/database", "user", "pass");
             st = conexion.createStatement();
             String query = "SELECT * FROM webchat_users WHERE name = '" + usuario + "'";
             ResultSet rs;
@@ -714,7 +905,7 @@ public class Graficos extends javax.swing.JFrame {
         } else {
             String passenc = encript(pass1);
             try {
-                conexion = DriverManager.getConnection("jdbc:mysql://db4free.net:3306/klausmain", "madprogrammer", "aezakmy4891734");
+                conexion = DriverManager.getConnection("jdbc:mysql://server:port/database", "user", "pass");
                 try {
                     st2 = conexion.createStatement();
                     String query = "SELECT * FROM webchat_users WHERE usuarioenc='" + usuarioenc + "'";
@@ -808,7 +999,7 @@ public class Graficos extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             try {
-                conexion = DriverManager.getConnection("jdbc:mysql://db4free.net:3306/klausmain", "madprogrammer", "aezakmy4891734");
+                conexion = DriverManager.getConnection("jdbc:mysql://server:port/database", "user", "pass");
                 try {
                     st = conexion.createStatement();
                     String query = "SELECT * FROM webchat_users WHERE name = '" + usuario + "'";
